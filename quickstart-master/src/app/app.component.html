@@ -1,0 +1,33 @@
+<h1>Hello {{name}} other</h1>
+	<input type="text" [(ngModel)]="name">
+	<input type="text" [(ngModel)]="age">
+	<input type="text" [(ngModel)]="place">
+	<button (click)="addPeopleData()">Add</button>
+	<hr>
+	<input type="text" [(ngModel)]="people1.id">
+	<input type="text" [(ngModel)]="people1.name">
+	<input type="text" [(ngModel)]="people1.age">
+	<input type="text" [(ngModel)]="people1.place">
+	<button *ngIf="!isEdit" (click)="addPeopleData1(people1)">Add</button>
+	<button *ngIf="isEdit" (click)="updatePeopleData(people1)">Update</button>
+	<button (click)="loadPeopleData()">Load</button>
+	<hr>
+	<table>
+	<thead>
+	  <th>Id</th>
+	  <th>Name</th>
+	  <th>Age</th>
+	  <th>Place</th>
+	</thead>
+	<tbody>
+	<tr *ngFor="let people of peopleData">
+	  <td><span *ngIf="!(isEdit && people1.id==people.id)">{{people.id}}</span><span *ngIf="(isEdit && people1.id==people.id)"><input [(ngModel)]="people1.id"></span></td>
+		<td><span *ngIf="!(isEdit && people1.id==people.id)">{{people.name}}</span><span *ngIf="(isEdit && people1.id==people.id)"><input [(ngModel)]="people1.name"></span></td>
+		<td>{{people.age}}</td>
+		<td>{{people.place}}</td>
+		<td><a (click)="loadEdit(people)">Edit</a></td>
+		<td><a (click)="deletePeopleData(people)">Delete</a></td>
+		<td><button *ngIf="isEdit" (click)="updatePeopleData(people1)">Update</button></td>
+	</tr>
+	</tbody>
+	</table>
